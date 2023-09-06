@@ -180,6 +180,7 @@ funcao sala2(){
 				escreva("Apenas vazio...\n")u.aguarde(2000)
 				}
 				se(janela == 0){
+					carregar_imagem("janela.png")
 				escrever("Voce vai até a janela\n")u.aguarde(2000)
 				escrever("E vê uma visão que voce achou que nunca iria experenciar na vida\n")u.aguarde(2000)
 				escrever("Você nao tinha parado pra pensar, você foi abduzido por um Ovni\n")u.aguarde(2000)
@@ -244,6 +245,7 @@ funcao sala2(){
 					se(porta == 1){
 						limpa()
 						escrever("A porta está aberta, e voce vê uma passagem adiante")
+						sala3()
 					}
 			
 			}
@@ -257,12 +259,14 @@ funcao sala2(){
 		escrever("O latido do Magrelinho\nVoce segue em direçao\ne chegando lá voce encontra\n")u.aguarde(2000)
 		escrever("O magrelinho\n")u.aguarde(2000)
 		escrever("Mas não só ele\n")
+		carregar_imagem("boss.png")
 		escrever("Voce ve esse ser humanoíde, que está prendendo o Magrelinho\n")
 		escrever("Neste momento voce se enche de ira ao ver o seu companheiro preso\n")
 		escrever("Ele mexe em um dispositvo em seu ouvido e começa a falar\n")
 		escrever("-Quem é você, como voce foi libertado, voce deveria estar em uma capsula me gerando energia vital, humano mediocre\n")
-		escrever("-Me devolve o Magrlinho \nMagrlinho?Este ser aqui, ele é só mais um assim como todos os outro, e ele está  gerando energia vital para mim, só eu e meu povo sao merecedores de viver nesse mundo")u.aguarde(2000)
+		escrever("-Me devolve o Magrlinho \nMagrlinho?\nEste ser aqui, ele é só mais um assim como todos os outro,\n e ele está  gerando energia vital para mim,\n só eu e meu povo sao merecedores de viver nesse mundo\n")u.aguarde(2000)
 		escrever("-Eu serei imortal as suas custas raças inferiores.")u.aguarde(2000)
+		batalha()
 		
 
 			
@@ -277,6 +281,8 @@ funcao sala2(){
 		inteiro ataque
 		
 		escrever("Voce se ve desarmado contra esse bixo, e entao voce na força da ira arranca um cano de metal da parede")u.aguarde(2000)
+		carregar_imagem("cano.png")u.aguarde(3000)
+		carregar_imagem("boss.png")
 		enquanto(boss != 0){
 			limpa()
 			escreva("Vida:",vida)
@@ -284,6 +290,7 @@ funcao sala2(){
 			escrever("1-Atacar \n2-Bloquear(bloqueia o proximo ataque do boss)\n 3-Salvar o Magrelinho")
 			leia(opcao2)
 			se(opcao2 == 1){
+				escrever("\nVoce pega seu projeto de baseball bat e bate no inimigo")
 			ataque = u.sorteia(10,15)	
 			boss = boss - ataque
 			}
@@ -291,18 +298,42 @@ funcao sala2(){
 			bloquear = 1 
 			}
 			se(opcao2 == 3){
-				se(boss < 50){
-				escrever("Voce se esquiva do Alien em seu momento de cansaço\n e chega até o Magrelinho")	
-				escrever("\n voce chega até ele e quebra a sua cápsula, ele acorda e começa a rosnar para o Alien\n")
-				escrever("Ele corre para cima do alien")
-				escrever("E morde a cápsula em seu peito que já estava danificada pelos seus ataques\n")
-				escrever("")				
+				se(boss <= 50){
+					limpa()
+				escrever("\nVoce se esquiva do Alien em seu momento de cansaço\n e chega até o Magrelinho")	u.aguarde(2000)
+				carregar_imagem("dog.png")
+				escrever("\n voce chega até ele e quebra a sua cápsula, ele acorda e começa a rosnar para o Alien\n")u.aguarde(2000)
+				escrever("Ele corre para cima do alien")u.aguarde(2000)
+				escrever("E morde a cápsula em seu peito que já estava danificada pelos seus ataques\n")u.aguarde(4000)
+				escrever("Que acaba quebrando e o Alien começa a fazer barulhos de dor e sofrimento \n")u.aguarde(2000)
+				escrever("Voce pega o magrelinho e procura por uma sala de comando, a nave está em alerta, mas voce a encontra\n")u.aguarde(2000)
+				escrever("E APERTA TODOS OS BOTOES\n")u.aguarde(2000)
+				escrever("O Ovni começa a se virar para a Terra de alguma forma e voce se aproxima\n")u.aguarde(2000)	
+				escrever("-QUEDA BRUSCA TRIPULANTES, AFIVELEM BEM OS CINTOS\n")	u.aguarde(2000)
+				escrever("Voce senta em uma cadeira e aperta o cinto.\n")u.aguarde(2000)
+				escrever("Voce aperta o Magrelinho com todas as forças")u.aguarde(2000)
+				escrever("POW")u.aguarde(2000)escreva("\n. . .")
+				escrever("\nVoce abre os olhos eve que está tudo bem e o Magrelinho está bem.\nVoce busca a saida\nE vai embora com seu cachorro em maos")
+				carregar_imagem("vitoria.png")u.aguarde(10000)
+				
+						
 				}
 				senao{
-				escrever("O Alien ainda está muito forte e nao te deixa passar para pega-lo")	
+				escrever("\nO Alien ainda está muito forte e nao te deixa passar para pega-lo\n")	
 				}
 			}
-			
+			se(bloquear == 0){
+			ataque = u.sorteia(10,15)
+			vida = vida - ataque}
+			se(bloquear == 1){
+				escreva("\nVoce bloqueou o ataque")
+			}
+			se(vida <= 0){ 
+				limpa()
+				escrever("Voce morreu")
+				
+			}
+			bloquear = 0
 		}
 
 }//funcao batalha
@@ -317,7 +348,7 @@ funcao sala2(){
 		n_d_caract = t.numero_caracteres(txt) -1
 		para(inteiro i = 0 ;i <=n_d_caract ;i++  ){
 		carac = t.obter_caracter(txt, i)
-		escreva(carac)u.aguarde(30)
+		escreva(carac)u.aguarde(5)
 			
 		}
 		
@@ -350,8 +381,7 @@ funcao sala2(){
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 6706; 
- * @DOBRAMENTO-CODIGO = [8, 47, 103, 252, 270, 313, 329];
+ * @POSICAO-CURSOR = 10307; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
